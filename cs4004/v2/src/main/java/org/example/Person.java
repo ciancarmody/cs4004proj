@@ -1,0 +1,85 @@
+package org.example;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Person{
+    private String name;
+    private String email;
+    private ArrayList<Loan> loans;
+    private ArrayList<String> departments = new ArrayList<>();
+
+    Person(String name, String email, String departments){
+        this.name = name;
+        if(!email.contains("@") || !email.contains(".") || !email.matches(".*[a-zA-Z].*")){
+            throw new RuntimeException("Cannot add this email. That's not an email");
+        }
+        this.email = email;
+        loans = new ArrayList<>();
+        String[] arr = departments.split(", ");
+        this.departments.addAll(Arrays.asList(arr));
+    }
+
+    public void addLoan(Loan loan){
+        for(Loan l:loans){
+            if(l.toString().matches(loan.toString())){
+                return;
+            }
+        }
+        String loanNameEmail = loan.getLoanedTo().getName() + loan.getLoanedTo().getEmail();
+        String perNameEmail = name + email;
+        if(!loanNameEmail.equals(perNameEmail)){
+            throw new RuntimeException("Cannot add this loan; was not taken out by this person");
+        }
+        loans.add(loan);
+    }
+
+    public void removeLoan(Loan loan){
+        loans.remove(loan);
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public String getEmail(){
+        return email;
+    }
+
+    public void setEmail(String email){
+        if(!email.contains("@") || !email.contains(".") || !email.matches(".*[a-zA-Z].*")){
+            throw new RuntimeException("Cannot add this email. That's not an email");
+        }
+        this.email = email;
+    }
+
+    public ArrayList<Loan> getLoans(){
+        return loans;
+    }
+
+    public String toString() {
+        return String.format("Name: %s, Email: %s", name,email);
+    }
+
+    public void addDepartments(String dep){
+        String[] arr = dep.split(", ");
+        this.departments.addAll(Arrays.asList(arr));
+    }
+
+    public ArrayList<String> getDepartments() {
+        return departments;
+    }
+
+    public String getDepartmentString(){
+        StringBuilder str = new StringBuilder();
+        for(String s:departments){
+            str.append(s).append(", ");
+        }
+        str.delete(str.length() - 2, str.length());
+        return str.toString();
+    }
+}
