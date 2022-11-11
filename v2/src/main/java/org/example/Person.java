@@ -76,6 +76,9 @@ public class Person{
 
     public String getDepartmentString(){
         StringBuilder str = new StringBuilder();
+        if(departments.isEmpty()){
+            return "all";
+        }
         for(String s:departments){
             str.append(s).append(", ");
         }

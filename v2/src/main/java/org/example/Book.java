@@ -2,6 +2,7 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.StringTokenizer;
 
 public class Book{
     private String author;
@@ -12,7 +13,18 @@ public class Book{
 
     private boolean availble;
     private ArrayList<String> departments = new ArrayList<>();
+
+    Book(String author, String releaseDate, String title, String edition, String publisher){
+        checkDateCorrect(releaseDate);
+        this.author = author;
+        this.releaseDate = releaseDate;
+        this.title = title;
+        this.edition = edition;
+        this.publisher = publisher;//regular add data
+        availble = true;//stop ppl from taking out books that r alredy out
+    }
     Book(String author, String releaseDate, String title, String edition, String publisher, String departments){
+        checkDateCorrect(releaseDate);
         this.author = author;
         this.releaseDate = releaseDate;
         this.title = title;
@@ -79,11 +91,27 @@ public class Book{
 
     public String getDepartmentString(){
         StringBuilder str = new StringBuilder();
+        if(departments.isEmpty()){
+            return "all";
+        }
         for(String s:departments){
             str.append(s).append(", ");
         }
         str.delete(str.length() - 2, str.length());
         return str.toString();//string just for departments cuz its awkward
+    }
+
+    private void checkDateCorrect(String date){
+        if(date.matches("[a-zA-Z]") || !date.matches(".*[0-9].*")){
+            throw new RuntimeException("not a valid date");
+        }
+        String[] in = date.split("/");
+        if(!(in.length - 3 == 0)){
+            throw new RuntimeException("not a valid date");
+        }
+        if(!(in[0].length() - 2 == 0) || !(in[1].length() - 2 == 0) || !(in[2].length() - 4 == 0)){
+            throw new RuntimeException("not a valid date");
+        }
     }
 
     public boolean getAvailble(){

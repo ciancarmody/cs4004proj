@@ -34,7 +34,10 @@ public class BookTest{
 
     @Test
     public void departmentsTest(){//tests
-        Book a = new Book("author", "releaseDate", "title", "edition", "publisher", "a");
+        Book a = new Book("author", "01/02/0003", "title", "edition", "publisher", "a");
+        Book b = new Book("author", "01/02/0003", "title", "edition", "publisher");
+        assertEquals("all", b.getDepartmentString());
+        assertEquals("a", a.getDepartmentString());
         a.addDepartments("b");
         String[] arr = {"a","b"};
         assertEquals(a.getDepartmentString(), "a, b");
@@ -45,11 +48,20 @@ public class BookTest{
     @Test
     public void testBookAvailability(){//book cant be taken out on loan if its alredy on loan, becomes avalible when returned
         Person p1 = new Person("a","a@b.com","a");
-        Book b2 = new Book("a1", "2035-06-15","title1","1","pub1", "a");
+        Book b2 = new Book("a1", "01/02/0003","title1","1","pub1", "a");
         assertTrue(b2.getAvailble());
         Loan l1 = new Loan(b2,p1);
         assertFalse(b2.getAvailble());
         l1.returnBook();
         assertTrue(b2.getAvailble());
+    }
+
+    @Test
+    public void badDate(){
+        assertThrows(RuntimeException.class, () -> new Book("a","ds","book","ed","pub"));
+        assertThrows(RuntimeException.class, () -> new Book("a","///","book","ed","pub"));
+        assertThrows(RuntimeException.class, () -> new Book("a","34324453","book","ed","pub"));
+        assertThrows(RuntimeException.class, () -> new Book("a","12/425","book","ed","pub"));
+        assertThrows(RuntimeException.class, () -> new Book("a","12/4/25","book","ed","pub"));
     }
 }

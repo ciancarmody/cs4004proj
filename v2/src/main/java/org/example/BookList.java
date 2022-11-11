@@ -9,12 +9,10 @@ public class BookList{
     private ArrayList<String> departments = new ArrayList<>();
     private ArrayList<Book> books = new ArrayList();
 
-    BookList(String listName){
-        this.listName = listName;
+    BookList(){
     }
 
-    BookList(String listName, String departments){
-        this.listName = listName;
+    BookList(String departments){
         String[] arr = departments.split(", ");
         this.departments.addAll(Arrays.asList(arr));//has departments so u can make a boooklist of only one
     }
@@ -52,6 +50,9 @@ public class BookList{
 
     public String getDepartmentString(){
         StringBuilder str = new StringBuilder();
+        if(departments.isEmpty()){
+            return "all";
+        }
         for(String s:departments){
             str.append(s).append(", ");
         }

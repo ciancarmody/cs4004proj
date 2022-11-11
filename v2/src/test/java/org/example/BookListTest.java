@@ -8,13 +8,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BookListTest{
 
-    Book z = new Book("a1", "2035-06-15", "title1", "1", "pub1","a, b");
-    Book x = new Book("a2", "2003-12-15", "title2", "2", "pub2","a");
-    Book c = new Book("a2", "2003-12-15", "title2", "2", "pub2","a, b");
-    Book v = new Book("a2", "2003-12-15", "title2", "2", "pub2","c, b");
-    Book b = new Book("a2", "2003-12-15", "title2", "2", "pub2","c");
+    Book z = new Book("a1", "01/02/0003", "title1", "1", "pub1","a, b");
+    Book x = new Book("a2", "01/02/0003", "title2", "2", "pub2","a");
+    Book c = new Book("a2", "01/02/0003", "title2", "2", "pub2","a, b");
+    Book v = new Book("a2", "01/02/0003", "title2", "2", "pub2","c, b");
+    Book b = new Book("a2", "01/02/0003", "title2", "2", "pub2","c");
 
-    BookList bl = new BookList("test","test");
+    BookList bl = new BookList("test");
     ArrayList<Book> list = new ArrayList<Book>();
 
     @Test
@@ -26,10 +26,10 @@ public class BookListTest{
         list.add(b);
 
         bl.addBook(z);
-        bl.addBook("a2", "2003-12-15","title2","2","pub2","a");
+        bl.addBook("a2", "01/02/0003","title2","2","pub2","a");
         bl.addBook(c);
         bl.addBook(v);
-        bl.addBook("a2", "2003-12-15","title2","2","pub2","c");
+        bl.addBook("a2", "01/02/0003","title2","2","pub2","c");
 
         StringBuilder s = new StringBuilder();
         for(Book boo: bl.getBookList()){

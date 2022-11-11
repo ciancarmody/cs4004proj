@@ -14,8 +14,8 @@ public class PersonTest{
     Person p1 = new Person(name, email,"a");
     Person p2 = new Person("a", "a@b.com","a");
 
-    Book b1 = new Book("a1", "2035-06-15","title1","1","pub1", "a");
-    Book b2 = new Book("a2", "2035-06-15","title2","1","pub2", "a");
+    Book b1 = new Book("a1", "06/12/2035","title1","1","pub1", "a");
+    Book b2 = new Book("a2", "06/12/2035","title2","1","pub2", "a");
     Loan l1 = new Loan(b1,p1);
     Loan l2 = new Loan(b2,p2);
 

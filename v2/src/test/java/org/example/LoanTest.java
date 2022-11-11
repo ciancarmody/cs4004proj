@@ -9,8 +9,8 @@ import static org.junit.jupiter.api.Assertions.*;
 public class LoanTest{
 
     Person p1 = new Person("alex butler", "a@gmail.com","a");
-    Book b1 = new Book("a1", "2035-06-15","title1","1","pub1", "a");
-    Book b2 = new Book("a1", "2035-06-15","title1","1","pub1", "a");
+    Book b1 = new Book("a1", "01/02/0003","title1","1","pub1", "a");
+    Book b2 = new Book("a1", "06/12/2035","title1","1","pub1", "a");
     Loan l1 = new Loan(b1,p1);
 
     @Test
